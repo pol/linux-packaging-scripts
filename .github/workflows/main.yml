@@ -150,15 +150,15 @@ jobs:
     - name: Upload Draft
       if: github.ref != 'refs/heads/main'
       run: | 
-        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u ChristopherHX -r linux-packaging-scripts -draft -b "$(cat changelog.txt)" "$(cat version.txt)-${GITHUB_RUN_NUMBER}" output/
+        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u pol -r linux-packaging-scripts -draft -b "$(cat changelog.txt)" "$(cat version.txt)-${GITHUB_RUN_NUMBER}" output/
     - name: Upload Release
       if: github.ref == 'refs/heads/main'
       run: |
-        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u ChristopherHX -r linux-packaging-scripts -b "$LAUNCHER_RELEASE_DESCRIPTION$(cat changelog.txt)" "$(cat version.txt)-${GITHUB_RUN_NUMBER}" output/
+        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u pol -r linux-packaging-scripts -b "$LAUNCHER_RELEASE_DESCRIPTION$(cat changelog.txt)" "$(cat version.txt)-${GITHUB_RUN_NUMBER}" output/
         mkdir -p output3
         cp output/*.zsync output3/
-        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u ChristopherHX -r linux-packaging-scripts -replace ng.appimage output3/
-        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u ChristopherHX -r linux-packaging-scripts -replace appimage output3/
+        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u pol -r linux-packaging-scripts -replace ng.appimage output3/
+        ./ghr*/ghr -t ${{ secrets.GITHUB_TOKEN }} -u pol -r linux-packaging-scripts -replace appimage output3/
       env:
         LAUNCHER_RELEASE_DESCRIPTION: |
           This Release is for Minecraft Android 1.13.0 - 1.18.12
